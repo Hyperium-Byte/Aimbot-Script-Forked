@@ -24,23 +24,23 @@ getgenv().Aimbot = {
 	Key                = "MouseButton2"
 }
 
-if Aimbot.Enabled then
-	Aimbot.FOVCircle.Position      = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
-	Aimbot.FOVCircle.Radius        = Aimbot.CircleRadius
-	Aimbot.FOVCircle.Filled        = Aimbot.CircleFilled
-	Aimbot.FOVCircle.Color         = Aimbot.CircleColor
-	Aimbot.FOVCircle.Visible       = Aimbot.CircleVisible
-	Aimbot.FOVCircle.Radius        = Aimbot.CircleRadius
-	Aimbot.FOVCircle.Transparency  = Aimbot.CircleTransparency
-	Aimbot.FOVCircle.Thickness     = Aimbot.CircleThickness
+if getgenv().Aimbot.Enabled then
+	getgenv().Aimbot.FOVCircle.Position      = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+	getgenv().Aimbot.FOVCircle.Radius        = getgenv().Aimbot.CircleRadius
+	getgenv().Aimbot.FOVCircle.Filled        = getgenv().Aimbot.CircleFilled
+	getgenv().Aimbot.FOVCircle.Color         = getgenv().Aimbot.CircleColor
+	getgenv().Aimbot.FOVCircle.Visible       = getgenv().Aimbot.CircleVisible
+	getgenv().Aimbot.FOVCircle.Radius        = getgenv().Aimbot.CircleRadius
+	getgenv().Aimbot.FOVCircle.Transparency  = getgenv().Aimbot.CircleTransparency
+	getgenv().Aimbot.FOVCircle.Thickness     = getgenv().Aimbot.CircleThickness
 
 	local function GetClosestPlayer()
-		local MaximumDistance = Aimbot.CircleRadius
+		local MaximumDistance = getgenv().Aimbot.CircleRadius
 		local Target = nil
 
 		for _, v in pairs(Players:GetChildren()) do
 			if v.Name ~= LocalPlayer.Name then
-				if TeamCheck == true then
+				if getgenv().Aimbot.TeamCheck == true then
 					if v.Team ~= LocalPlayer.Team then
 						if v.Character ~= nil then
 							if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
