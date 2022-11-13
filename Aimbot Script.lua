@@ -6,37 +6,40 @@ local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Holding = false
 
-_G.AimbotEnabled = true
-_G.TeamCheck = false -- If set to true then the script would only lock your aim at enemy team members.
-_G.AimPart = "Head" -- Where the aimbot script would lock at.
-_G.Sensitivity = 0 -- How many seconds it takes for the aimbot script to officially lock onto the target's aimpart.
+local Aimbot = {
+	Enabled            = true,
+	TeamCheck          = false,
+	AimPart            = "Head",
+	AimTime            = 0,
+	
+	CircleColor        = Color3.fromRGB(255, 255, 255),
+	CircleTransparency = 0.7,
+	CircleRadius       = 80,
+	CircleFilled       = false,
+	CircleVisible      = true,
+	CircleThickness    = 0,
+	
+	FOVCircle          = Drawing.new("Circle"),
+	
+	Key                = "MouseButton2"
+}
 
-_G.CircleSides = 64 -- How many sides the FOV circle would have.
-_G.CircleColor = Color3.fromRGB(255, 255, 255) -- (RGB) Color that the FOV circle would appear as.
-_G.CircleTransparency = 0.7 -- Transparency of the circle.
-_G.CircleRadius = 80 -- The radius of the circle / FOV.
-_G.CircleFilled = false -- Determines whether or not the circle is filled.
-_G.CircleVisible = true -- Determines whether or not the circle is visible.
-_G.CircleThickness = 0 -- The thickness of the circle.
-
-local FOVCircle = Drawing.new("Circle")
-FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
-FOVCircle.Radius = _G.CircleRadius
-FOVCircle.Filled = _G.CircleFilled
-FOVCircle.Color = _G.CircleColor
-FOVCircle.Visible = _G.CircleVisible
-FOVCircle.Radius = _G.CircleRadius
-FOVCircle.Transparency = _G.CircleTransparency
-FOVCircle.NumSides = _G.CircleSides
-FOVCircle.Thickness = _G.CircleThickness
+Aimbot.FOVCircle.Position      = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+Aimbot.FOVCircle.Radius        = Aimbot.CircleRadius
+Aimbot.FOVCircle.Filled        = Aimbot.CircleFilled
+Aimbot.FOVCircle.Color         = Aimbot.CircleColor
+Aimbot.FOVCircle.Visible       = Aimbot.CircleVisible
+Aimbot.FOVCircle.Radius        = Aimbot.CircleRadius
+Aimbot.FOVCircle.Transparency  = Aimbot.CircleTransparency
+Aimbot.FOVCircle.Thickness     = Aimbot.CircleThickness
 
 local function GetClosestPlayer()
-	local MaximumDistance = _G.CircleRadius
+	local MaximumDistance = Aimbot.CircleRadius
 	local Target = nil
 
-	for _, v in next, Players:GetPlayers() do
+	for _, v in pairs(Players:GetChildren()) do
 		if v.Name ~= LocalPlayer.Name then
-			if _G.TeamCheck == true then
+			if TeamCheck == true then
 				if v.Team ~= LocalPlayer.Team then
 					if v.Character ~= nil then
 						if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
@@ -72,29 +75,30 @@ local function GetClosestPlayer()
 end
 
 UserInputService.InputBegan:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+    if Input.UserInputType == Enum.UserInputType[Aimbot.Key] then
         Holding = true
     end
 end)
 
 UserInputService.InputEnded:Connect(function(Input)
-    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+    if Input.UserInputType == Enum.UserInputType[Aimbot.Key] then
         Holding = false
     end
 end)
 
 RunService.RenderStepped:Connect(function()
-    FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-    FOVCircle.Radius = _G.CircleRadius
-    FOVCircle.Filled = _G.CircleFilled
-    FOVCircle.Color = _G.CircleColor
-    FOVCircle.Visible = _G.CircleVisible
-    FOVCircle.Radius = _G.CircleRadius
-    FOVCircle.Transparency = _G.CircleTransparency
-    FOVCircle.NumSides = _G.CircleSides
-    FOVCircle.Thickness = _G.CircleThickness
+    Aimbot.FOVCircle.Position        = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+    Aimbot.FOVCircle.Radius          = Aimbot.CircleRadius
+    Aimbot.FOVCircle.Filled          = Aimbot.CircleFilled
+    Aimbot.FOVCircle.Color           = Aimbot.CircleColor
+    Aimbot.FOVCircle.Visible         = Aimbot.CircleVisible
+    Aimbot.FOVCircle.Radius          = Aimbot.CircleRadius
+    Aimbot.FOVCircle.Transparency    = Aimbot.CircleTransparency
+    Aimbot.FOVCircle.Thickness       = Aimbot.CircleThickness
 
-    if Holding == true and _G.AimbotEnabled == true then
-        TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
+    if Holding == true and Aimbot.Enabled == true then
+        TweenService:Create(Camera, TweenInfo.new(Aimbot.AimTime, Enum.EasingStyle.Linear), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[Aimbot.AimPart].Position)}):Play()
     end
 end)
+
+return Aimbot
