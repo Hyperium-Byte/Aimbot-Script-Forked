@@ -32,7 +32,6 @@ Aimbot.AimTime   = 0      -- How many seconds it takes for the aimbot script to 
 ```lua
 --// FOV Circle
 
-Aimbot.CircleSides = 64 -- How many sides the FOV circle would have.
 Aimbot.CircleColor = Color3.fromRGB(255, 255, 255) -- (RGB) Color that the FOV circle would appear as.
 Aimbot.CircleTransparency = 0.7 -- Transparency of the circle.
 Aimbot.CircleRadius = 80 -- The radius of the circle / FOV.
