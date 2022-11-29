@@ -7,32 +7,32 @@ local LocalPlayer = Players.LocalPlayer
 local Holding = false
 
 getgenv().Aimbot = {
-	Enabled            = true,
-	TeamCheck          = false,
-	AimPart            = "Head",
-	AimTime            = 0,
+	Enabled = true,
+	TeamCheck = false,
+	AimPart = "Head",
+	AimTime = 0,
 	
-	CircleColor        = Color3.fromRGB(255, 255, 255),
+	CircleColor = Color3.fromRGB(255, 255, 255),
 	CircleTransparency = 0.7,
-	CircleRadius       = 80,
-	CircleFilled       = false,
-	CircleVisible      = true,
-	CircleThickness    = 0,
+	CircleRadius = 80,
+	CircleFilled = false,
+	CircleVisible = true,
+	CircleThickness = 0,
 	
-	FOVCircle          = Drawing.new("Circle"),
+	FOVCircle = Drawing.new("Circle"),
 	
-	Key                = "MouseButton2"
+	Key = "MouseButton2"
 }
 
 if getgenv().Aimbot.Enabled then
-	getgenv().Aimbot.FOVCircle.Position      = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
-	getgenv().Aimbot.FOVCircle.Radius        = getgenv().Aimbot.CircleRadius
-	getgenv().Aimbot.FOVCircle.Filled        = getgenv().Aimbot.CircleFilled
-	getgenv().Aimbot.FOVCircle.Color         = getgenv().Aimbot.CircleColor
-	getgenv().Aimbot.FOVCircle.Visible       = getgenv().Aimbot.CircleVisible
-	getgenv().Aimbot.FOVCircle.Radius        = getgenv().Aimbot.CircleRadius
+	getgenv().Aimbot.FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+	getgenv().Aimbot.FOVCircle.Radius = getgenv().Aimbot.CircleRadius
+	getgenv().Aimbot.FOVCircle.Filled = getgenv().Aimbot.CircleFilled
+	getgenv().Aimbot.FOVCircle.Color = getgenv().Aimbot.CircleColor
+	getgenv().Aimbot.FOVCircle.Visible = getgenv().Aimbot.CircleVisible
+	getgenv().Aimbot.FOVCircle.Radius = getgenv().Aimbot.CircleRadius
 	getgenv().Aimbot.FOVCircle.Transparency  = getgenv().Aimbot.CircleTransparency
-	getgenv().Aimbot.FOVCircle.Thickness     = getgenv().Aimbot.CircleThickness
+	getgenv().Aimbot.FOVCircle.Thickness = getgenv().Aimbot.CircleThickness
 
 	local function GetClosestPlayer()
 		local MaximumDistance = getgenv().Aimbot.CircleRadius
