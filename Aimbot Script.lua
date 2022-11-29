@@ -103,7 +103,7 @@ if getgenv().Aimbot.Enabled then
 
 	    if Holding == true and Aimbot.Enabled == true then
 		if GetClosestPlayer().Character[getgenv().Aimbot.AimPart] then
-			TweenService:Create(Camera, TweenInfo.new(Aimbot.AimTime, Enum.EasingStyle.Linear), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[getgenv().Aimbot.AimPart].Position)}):Play()
+			TweenService:Create(Camera, TweenInfo.new(Aimbot.AimTime, Enum.EasingStyle.Quad), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[getgenv().Aimbot.AimPart].Position)}):Play()
 		end
 	    end
 	end)
