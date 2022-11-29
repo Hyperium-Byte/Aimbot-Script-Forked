@@ -89,20 +89,22 @@ if getgenv().Aimbot.Enabled then
 
 	RunService.RenderStepped:Connect(function()
 	    if getgenv().Aimbot.Enabled then
-	    	getgenv().Aimbot.FOVCircle.Position        = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-	    	getgenv().Aimbot.FOVCircle.Radius          = Aimbot.CircleRadius
-	    	getgenv().Aimbot.FOVCircle.Filled          = Aimbot.CircleFilled
-	    	getgenv().Aimbot.FOVCircle.Color           = Aimbot.CircleColor
-	    	getgenv().Aimbot.FOVCircle.Visible         = Aimbot.CircleVisible
-	    	getgenv().Aimbot.FOVCircle.Radius          = Aimbot.CircleRadius
-	    	getgenv().Aimbot.FOVCircle.Transparency    = Aimbot.CircleTransparency
-	    	getgenv().Aimbot.FOVCircle.Thickness       = Aimbot.CircleThickness
+	    	getgenv().Aimbot.FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+	    	getgenv().Aimbot.FOVCircle.Radius = Aimbot.CircleRadius
+	    	getgenv().Aimbot.FOVCircle.Filled = Aimbot.CircleFilled
+	    	getgenv().Aimbot.FOVCircle.Color = Aimbot.CircleColor
+	    	getgenv().Aimbot.FOVCircle.Visible = Aimbot.CircleVisible
+	    	getgenv().Aimbot.FOVCircle.Radius = Aimbot.CircleRadius
+	    	getgenv().Aimbot.FOVCircle.Transparency = Aimbot.CircleTransparency
+	    	getgenv().Aimbot.FOVCircle.Thickness = Aimbot.CircleThickness
 	    else
 		getgenv().Aimbot.FOVCircle.Visible         = false
 	    end
 
 	    if Holding == true and Aimbot.Enabled == true then
-		TweenService:Create(Camera, TweenInfo.new(Aimbot.AimTime, Enum.EasingStyle.Linear), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[getgenv().Aimbot.AimPart].Position)}):Play()
+		if GetClosestPlayer().Character[getgenv().Aimbot.AimPart].Position then
+			TweenService:Create(Camera, TweenInfo.new(Aimbot.AimTime, Enum.EasingStyle.Linear), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[getgenv().Aimbot.AimPart].Position)}):Play()
+		end
 	    end
 	end)
 end
