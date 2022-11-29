@@ -45,7 +45,7 @@ if getgenv().Aimbot.Enabled then
 						if v.Character then
 							if v.Character:FindFirstChild("HumanoidRootPart") or v.Character:FindFirstChild(getgenv().Aimbot.AimPart) or v.Character:FindFirstChild("Humanoid") then
 								if v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 then
-									local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+									local ScreenPoint = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
 									local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
 
 									if VectorDistance < MaximumDistance then
